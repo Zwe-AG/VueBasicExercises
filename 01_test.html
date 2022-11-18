@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VUE Testing</title>
+</head>
+
+<body>
+
+    <!-- Simple  -->
+    <div id="app">
+        <h1> {{ title }} </h1>
+        <h1> {{ 1 + 1 }} </h1>
+        <h1> {{ year + 3 }} </h1>
+    </div>
+
+    <!-- If  -->
+    <div id="ifapp">
+        <span v-if="seen">{{ title }}</span>
+    </div>
+
+    <!-- For I  -->
+    <div id="forapp">
+        <span v-for="fruit in fruits">
+            <h1>{{ fruit }}</h1>
+        </span>
+    </div>
+
+    <!-- For II  -->
+    <ol id="forapptwo">
+        <li v-for="todo in todos">
+            <h4>{{ todo.text }}</h4>
+        </li>
+    </ol>
+
+    <div id="app1">
+        <h1> {{ message }}</h1>
+    </div>
+
+    <div id="appif">
+        <span v-if="seen">
+            {{ status }}
+        </span>
+    </div>
+
+    <div id="forapp3">
+        <span v-for="car in cars">
+            {{ car }}
+        </span>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            'title': "Hello world",
+            'age': 20,
+            'year': 2022
+        }
+    });
+
+    let app1 = new Vue({
+        el: "#app1",
+        data: {
+            'title': "Zwe Htet",
+            'message': "This is testing message"
+        }
+    })
+
+    let ifapp = new Vue({
+        el: '#ifapp',
+        data: {
+            seen: true,
+            'title': 'Hello Guys',
+        }
+    });
+
+    let appif = new Vue({
+        el: "#appif",
+        data: {
+            'status': 'Success',
+            seen: false
+        }
+    });
+
+
+    let forapp = new Vue({
+        el: '#forapp',
+        data: {
+            fruits: [
+                'Mango',
+                'Orange',
+                'Banana'
+            ],
+        }
+    });
+
+    let forapp3 = new Vue({
+        el: "#forapp3",
+        data: {
+            cars: [
+                'BMW',
+                'TOYOTA',
+                'NISSAN'
+            ]
+        }
+    })
+
+    let forapptwo = new Vue({
+        el: '#forapptwo',
+        data: {
+            todos: [
+                { text: "Javascript" },
+                { text: " PHP " },
+                { text: "MySql" }
+            ]
+        }
+    });
+
+
+
+</script>
+
+</html>

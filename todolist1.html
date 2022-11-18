@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todo List</title>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            margin: 100px;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        h3 {
+            font-size: 30px;
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        input,
+        button {
+            width: 300px;
+            height: 40px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        input::placeholder {
+            font-size: 18px;
+            padding-left: 10px;
+        }
+
+        button {
+            margin: 0 auto;
+            font-size: 20px;
+            color: black;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: greenyellow;
+            border: none;
+            margin-top: 20px;
+        }
+
+        small {
+            color: red;
+            margin-left: 560px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h3>Todo List</h3>
+        <input type="text" placeholder="Pizza Name....." v-model="pizza.name">
+        <small v-if="this.validation.nameStatus == true">Pizza Name is required</small>
+        <input type="text" placeholder="Pizza Price....." v-model="pizza.price">
+        <small v-if="this.validation.priceStatus==true">Pizza Price is required</small>
+        <button @click="addList">Add List</button>
+        <br>
+        <br>
+        <table id="customers">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            <tr v-for="item in items">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+
+        data: {
+            pizza: {
+                name: '',
+                price: '',
+            },
+            items: [],
+            validation: {
+                nameStatus: false,
+                priceStatus: false,
+            }
+        },
+
+        methods: {
+            addList() {
+                if (this.pizza.name == '') {
+                    this.validation.nameStatus = true;
+                } else {
+                    this.validation.nameStatus = false;
+                }
+                if (this.pizza.price == '') {
+                    this.validation.priceStatus = true;
+                } else {
+                    this.validation.priceStatus = false;
+                }
+
+                if (!this.validation.nameStatus && !this.validation.priceStatus) {
+                    this.items.push({
+                        id: this.items.length + 1,
+                        name: this.pizza.name,
+                        price: this.pizza.price,
+                    })
+                    this.pizza.name = "";
+                    this.pizza.price = "";
+                }
+
+            }
+
+        }
+
+    });
+</script>
+
+</html>
